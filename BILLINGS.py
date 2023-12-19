@@ -1,7 +1,7 @@
 import sqlite3
 import tkinter
 import tkinter.messagebox
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("mca_hms.db")
 
 #variables
 rootB=None
@@ -12,11 +12,11 @@ def date_up():
     b2 = dd.get()
     conn.execute("UPDATE ROOM SET DATE_DISCHARGED=? where PATIENT_ID=?", (b2, b1,))
     conn.commit()
-    tkinter.messagebox.showinfo("MEDANTA DATABASE SYSTEM", "DISCHARGE DATE UPDATED")
+    tkinter.messagebox.showinfo("ADMIN MESSAGE", "DISCHARGE DATE UPDATED")
 
 def up():
     global c1, b1, P_id, b3, b4, b5, b6, dd, treat_1, treat_2, cost_t, b7, b8, med, med_q, price, u
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     c1 = conn.cursor()
     b1 = P_id.get()
     b3 = treat_1.get(tkinter.ACTIVE)
@@ -28,11 +28,11 @@ def up():
     conn.execute("INSERT INTO TREATMENT VALUES(?,?,?,?)", (b1, b3, b4, b5,))
     conn.execute("INSERT INTO MEDICINE VALUES(?,?,?,?)", (b1, b6, b7, b8,))
     conn.commit()
-    tkinter.messagebox.showinfo("MEDANTA DATABASE SYSTEM", "BILLING DATA SAVED")
+    tkinter.messagebox.showinfo("ADMIN MESSAGE", "BILLING DATA SAVED")
 
 def calci():
     global b1
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     u=conn.execute("Select sum(T_COST+ (M_COST*M_QTY) +(DATE_DISCHARGED-DATE_ADMITTED)*RATE) FROM ROOM NATURAL JOIN TREATMENT natural JOIN MEDICINE where PATIENT_ID=?",(b1,) )
     conn.commit()
     for ii in u:

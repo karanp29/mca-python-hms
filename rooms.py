@@ -1,7 +1,7 @@
 import sqlite3
 import tkinter
 import tkinter.messagebox
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("mca_hms.db")
 
 P_id=None
 rootR=None
@@ -9,7 +9,7 @@ rootR=None
 ##ROOM BUTTON
 def room_button():
     global P_id,r1,r2,room_t,da,dd,rate,room_no,r3,r4,r5,r6,conn
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     r1=P_id.get()
     r2=room_t.get(tkinter.ACTIVE)
     r3=room_no.get(tkinter.ACTIVE)
@@ -17,7 +17,7 @@ def room_button():
     r5=da.get()
     r6=dd.get()
     conn.execute('INSERT INTO ROOM VALUES(?,?,?,?,?,?)',(r1,r3, r2, r4, r5, r6,))
-    tkinter.messagebox.showinfo("MEDANTA DATABSE SYSTEM", "ROOM ALLOCATED")
+    tkinter.messagebox.showinfo("ADMIN MESSAGE", "ROOM ALLOCATED")
     conn.commit()
     conn.close()
 
@@ -47,7 +47,7 @@ def EXITT():
 ##FUNCTION FOR ROOM DISPLAY BUTTON
 def ROOMD_button():
     global r1,lr1,dis1,lr2,dis2,c1,ii,conn,c1,P_iid
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     c1=conn.cursor()
     r1=P_iid.get()
     p=list(c1.execute('select * from  ROOM  where PATIENT_ID=?',(r1,)))

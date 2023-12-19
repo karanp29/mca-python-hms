@@ -1,15 +1,15 @@
 import tkinter
 import sqlite3
 import tkinter.messagebox
-from PATDELSU import P_display
-from PATDELSU import D_display
-from PATDELSU import P_UPDATE
-from RooMT import Room_all
-from BILLING import BILLING
+from patients import P_display
+from patients import D_display
+from patients import P_UPDATE
+from rooms import Room_all
+from BILLINGS import BILLING
 from employee_reg import emp_screen
 from appointment import appo
 
-#conn=sqlite3.connect("MDBA.db")
+#conn=sqlite3.connect("mca_hms.db")
 print("DATABASE CONNECTION SUCCESSFUL")
 
 #variables
@@ -36,15 +36,15 @@ def ex():
 def menu():
     global root1,button1,button2,button3,button4,button5,m,button6
     root1=tkinter.Tk()
-    root1.geometry("280x350")
-    root1.title("MAIN MENU")
-    m=tkinter.Label(root1,text="MENU",font='Times 16 bold italic',fg='grey')
-    button1=tkinter.Button(root1,text="1.PATIENT REGISTRATION",command=PAT,bg='light blue',fg='black')
-    button2 = tkinter.Button(root1, text="2.ROOM ALLOCATION",bg='light green',fg='black',command=Room_all)
-    button3 = tkinter.Button(root1, text="3.EMPLOYEE REGISTRATION",bg='light blue',fg='black',command=emp_screen)
-    button4 = tkinter.Button(root1, text="4.BOOK APPOINTMENT",bg='light green',fg='black',command=appo)
-    button5 = tkinter.Button(root1, text="5.PATIENT BILL",bg='light blue',fg='black',command=BILLING)
-    button6 = tkinter.Button(root1, text="6.EXIT",command=ex,bg='light green',fg='black')
+    root1.geometry("500x500")
+    root1.title("ADMIN MENU")
+    m=tkinter.Label(root1,text="MENU",font='CONSOLAS',fg='Black',anchor="center")
+    button1=tkinter.Button(root1,text="1.PATIENT REGISTRATION",command=PAT,font='CONSOLAS',bg='steelblue',fg='white')
+    button2 = tkinter.Button(root1, text="2.ROOM ALLOCATION",bg='steelblue',font='CONSOLAS',fg='white',command=Room_all)
+    button3 = tkinter.Button(root1, text="3.EMPLOYEE REGISTRATION",bg='steelblue',font='CONSOLAS',fg='white',command=emp_screen)
+    button4 = tkinter.Button(root1, text="4.BOOK APPOINTMENT",bg='steelblue',font='CONSOLAS',fg='white',command=appo)
+    button5 = tkinter.Button(root1, text="5.PATIENT BILL",bg='steelblue',font='CONSOLAS',fg='white',command=BILLING)
+    button6 = tkinter.Button(root1, text="6.EXIT",command=ex,bg='steelblue',font='CONSOLAS',fg='white')
     m.place(x=75,y=5)
     button1.pack(side=tkinter.TOP)
     button1.place(x=80,y=50)
@@ -64,7 +64,7 @@ p=None
 #input patient form
 def IN_PAT():
     global pp1, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10,ce1,conn
-    conn=sqlite3.connect("MDBA.db")
+    conn=sqlite3.connect("mca_hms.db")
     conn.cursor()
     pp1=pat_ID.get()
     pp2=pat_name.get()
@@ -78,7 +78,7 @@ def IN_PAT():
     pp10=pat_email.get()
     conn.execute('INSERT INTO PATIENT VALUES(?,?,?,?,?,?,?,?)',(pp1,pp2,pp3,pp4,pp5,pp8,pp9,pp10,))
     conn.execute('INSERT INTO CONTACT_NO VALUES (?,?,?)',(pp1,pp6,pp7,))
-    tkinter.messagebox.showinfo("MEDANTA DATABSE SYSTEM","DETAILS INSERTED INTO DATABASE")
+    tkinter.messagebox.showinfo("ADMIN STATUS","DETAILS INSERTED INTO DATABASE")
     conn.commit()
 
 
@@ -88,10 +88,10 @@ def EXO():
 
 #function for patient form help
 def nothing():
-    print("CONTACT DATABASE HEAD :921 ")
+    print(" DATABASE")
 
 def nothing1():
-    print("MADE BY BHAVIYA BATRA")
+    print("debugging")
 
 #PATIENT FORM
 back=None
@@ -103,7 +103,7 @@ def PAT():
     global pat_address, pat_BG, pat_contact, pat_contactalt, pat_CT, pat_dob, pat_email, pat_ID, pat_name, pat_sex
     global rootp,regform,id,name,dob,sex,email,ct,addr,c1,c2,bg,SUBMIT,menubar,filemenu,back,SEARCH,DELETE,UPDATE
     rootp=tkinter.Tk()
-    rootp.title("MEDANTA PATIENT FORM")
+    rootp.title("PATIENT FORM")
     menubar=tkinter.Menu(rootp)
     filemenu=tkinter.Menu(menubar,tearoff=0)
     filemenu.add_command(label="NEW",command=PAT)
@@ -112,10 +112,10 @@ def PAT():
     helpmenu=tkinter.Menu(menubar,tearoff=0)
     helpmenu.add_command(label="HELP",command=nothing)
     helpmenu.add_command(label="ABOUT",command=nothing1)
-    menubar.add_cascade(label="File", menu=filemenu)
-    menubar.add_cascade(label="Help", menu=helpmenu)
+    # menubar.add_cascade(label="File", menu=filemenu)
+    # menubar.add_cascade(label="Help", menu=helpmenu)
     rootp.config(menu=menubar)
-    regform=tkinter.Label(rootp,text="REGISTRATION FORM",font="Arial 16 bold")
+    regform=tkinter.Label(rootp,text="REGISTRATION FORM",font="Consolas")
     id=tkinter.Label(rootp,text="PATIENT ID")
     pat_ID=tkinter.Entry(rootp)
     name=tkinter.Label(rootp,text="PATIENT NAME")

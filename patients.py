@@ -1,7 +1,7 @@
 import tkinter
 import sqlite3
 import tkinter.messagebox
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("mca_hms.db")
 #variables
 rootU=None
 rootD=None
@@ -73,7 +73,7 @@ def eXO():
 def P_display():
     global rootS,head,inp_s,entry,searchB
     rootS=tkinter.Tk()
-    rootS.title("SEARCH WINDOW")
+    rootS.title("SEARCH PATIENT")
     head=tkinter.Label(rootS,text="ENTER PATIENT ID TO SEARCH",fg="red")
     entry=tkinter.Entry(rootS)
     searchB=tkinter.Button(rootS,text='SEARCH',command=Search_button)
@@ -82,7 +82,7 @@ def P_display():
     filemenu.add_command(label="NEW", command=P_display)
     filemenu.add_separator()
     filemenu.add_command(label="EXIT", command=eXO)
-    menubar.add_cascade(label="File", menu=filemenu)
+    # menubar.add_cascade(label="File", menu=filemenu)
     rootS.config(menu=menubar)
     head.pack()
     entry.pack()
@@ -149,16 +149,16 @@ def up1():
     u8 = pat_email.get()
     u9 = pat_CT.get()
     u10 = pat_address.get()
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     p = list(conn.execute("Select * from PATIENT where PATIENT_ID=?", (u1,)))
     if len(p) != 0:
         conn.execute('UPDATE PATIENT SET NAME=?,SEX=?,DOB=?,BLOOD_GROUP=?,ADDRESS=?,CONSULT_TEAM=?,EMAIL=? where PATIENT_ID=?', ( u2, u3, u4, u5, u10, u9, u8,u1,))
         conn.execute('UPDATE CONTACT_NO set CONTACTNO=?,ALT_CONTACT=? WHERE PATIENT_ID=?', ( u6, u7,u1,))
-        tkinter.messagebox.showinfo("MEDANTA DATABSE SYSTEM", "DETAILS UPDATED INTO DATABASE")
+        tkinter.messagebox.showinfo("ADMIN MESSAGE", "DETAILS UPDATED INTO DATABASE")
         conn.commit()
 
     else:
-        tkinter.messagebox.showinfo("MEDANTA DATABSE SYSTEM", "PATIENT IS NOT REGISTERED")
+        tkinter.messagebox.showinfo("ADMIN MESSAGE", "PATIENT IS NOT REGISTERED")
 
 labelu=None
 bu1=None
@@ -178,7 +178,7 @@ def P_UPDATE():
     filemenu.add_separator()
     filemenu.add_command(label="EXIT", command=EXITT)
     rootU.config(menu=menubar)
-    menubar.add_cascade(label="File", menu=filemenu)
+    # menubar.add_cascade(label="File", menu=filemenu)
     HEAD=tkinter.Label(rootU,text="ENTER NEW DETAILS TO UPDATE",bg='black',fg='white')
     id = tkinter.Label(rootU, text="PATIENT ID")
     pat_ID = tkinter.Entry(rootU)

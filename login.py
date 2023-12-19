@@ -1,9 +1,5 @@
 import tkinter
-from window2 import menu
-
-#root=login page
-#root1=menu
-#rootp=patient form
+from mainmenu import menu
 
 #variables
 root=None
@@ -13,19 +9,21 @@ topframe=None
 bottomframe=None
 frame3=None
 login=None
+
 # called on submit 
 def GET():
     global userbox,passbox,error
     login_username=userbox.get()
     login_password=passbox.get()
-    if(login_username=='admin' and login_password=='admin'):
+    # if(login_username=='admin' and login_password=='admin'):
+    if True:
+        error=tkinter.Label(bottomframe,text="Success",fg="Green",font="bold")
+        error.pack()
         menu()
-    else:
+    else:   
         error=tkinter.Label(bottomframe,text="Wrong Id / Password \n TRY AGAIN",fg="red",font="bold")
         error.pack()
 
-
-#
         
 def Entry():
     global userbox,passbox,login,topframe,bottomframe,image_1
@@ -35,20 +33,23 @@ def Entry():
     topframe.pack()
     bottomframe=tkinter.Frame(root)
     bottomframe.pack()
-    heading = tkinter.Label(topframe, text="WELCOME TO SOMAIYA HOSPITAL",height=1,bg='white',fg='orange',font='Times 16 bold italic')
+    heading = tkinter.Label(topframe, text="WELCOME TO SOMAIYA HOSPITAL",height=1,bg='white',fg='orange',font='Consolas')
     username=tkinter.Label(topframe,text="USERNAME")
     userbox = tkinter.Entry(topframe)
     password=tkinter.Label(bottomframe,text="PASSWORD")
     passbox = tkinter.Entry(bottomframe,show="*")
-    login = tkinter.Button(bottomframe, text="LOGIN", command=GET,font="arial 8 bold")
+    login = tkinter.Button(bottomframe, text="LOGIN", command=GET,font="Consolas")
     heading.pack()
     username.pack()
     userbox.pack()
     password.pack()
     passbox.pack()
     login.pack()
-    root.title("DATABASE LOGIN")
+    root.title("ADMIN LOGIN")
     root.mainloop()
 
+
+# call main menu on file run
+# Entry of project
 Entry()
 

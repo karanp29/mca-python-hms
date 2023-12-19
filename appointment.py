@@ -1,6 +1,6 @@
 import tkinter
 import sqlite3
-conn=sqlite3.connect("MDBA.db")
+conn=sqlite3.connect("mca_hms.db")
 rootAA=None
 
 def set():
@@ -11,10 +11,10 @@ def set():
     p4=e4.get()
     p5=e5.get()
     p6=e6.get(1.0,tkinter.END)
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     conn.execute("Insert into appointment values(?,?,?,?,?,?)",(p1,p2,p3,p4,p5,p6,))
     conn.commit()
-    tkinter.messagebox.showinfo("MEDANTA DATABASE SYSTEM", "APPOINTMENT SET SUCCSESSFULLY")
+    tkinter.messagebox.showinfo("ADMIN MESSAGE", "APPOINTMENT SET SUCCSESSFULLY")
 
 
 def appo():
@@ -35,7 +35,7 @@ def appo():
     l3 = tkinter.Label(rootAA,text="APPOINTMENT NO")
     l3.place(x=20,y=90)
     L=['A1','A2','A3','A4','A5','A6','A7','A8','A9','A10','A11','A12','A13','A14','A15','A16','A17','A18','A19','A20','A21','A22','A23','A24','A25','A26','A27','A28','A29','A30','A31','A32','A33','A34','A35','A36','A37','A38','A39','A40','A41','A42','A43','A44','A45','A46','A47','A48','A49','A50']
-    e3=tkinter.Listbox(rootAA, width=15, height=1, selectmode='SINGLE', exportselection=0)
+    e3=tkinter.Listbox(rootAA, width=15, height=2, selectmode='SINGLE', exportselection=0)
     for jjj in L:
         e3.insert(tkinter.END, jjj)
     e3.place(x=140,y=90)
@@ -59,8 +59,8 @@ def appo():
     b1.place(x=20,y=310)
     b2=tkinter.Button(rootAA,text="Delete Appointment",command=dela)
     b2.place(x=180,y=310)
-    b4=tkinter.Button(rootAA,text="TODAYS APPOINTMENTS",command=va)
-    b4.place(x=320,y=310)
+    # b4=tkinter.Button(rootAA,text="TODAYS APPOINTMENTS",command=va)
+    # b4.place(x=320,y=310)
     rootAA.mainloop()
 
 def remove():

@@ -15,10 +15,10 @@ def inp():
     e7=t5.get()
     e8=t6.get()
     e9=t7.get()
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     conn.execute("INSERT INTO employee VALUES(?,?,?,?,?,?,?,?,?)",(e1,e2,e3,e4,e5,e6,e7,e8,e9,))
     conn.commit()
-    tkinter.messagebox.showinfo("MEDANTA DATABASE SYSTEM", "EMPLOYEE DATA ADDED")
+    tkinter.messagebox.showinfo("ADMIN MESSAGE", "EMPLOYEE DATA ADDED")
 
 def ex():
     rootE.destroy()
@@ -87,7 +87,7 @@ def emp_screen():
 def delling():
     global d1,de
     de=str(d1.get())
-    conn = sqlite3.connect("MDBA.db")
+    conn = sqlite3.connect("mca_hms.db")
     p = list(conn.execute("select * from employee where EMP_ID=?", (de,)))
     if (len(p) != 0):
         conn.execute("DELETE from employee where EMP_ID=?", (de,))
